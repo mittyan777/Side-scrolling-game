@@ -8,10 +8,13 @@ public class Player : MonoBehaviour
     [SerializeField] float Speed = 0;
     [SerializeField] float Speed2 = 0;
     [SerializeField] float jumpPower;
+    SpriteRenderer spriteRenderer;
+      
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
         {
             if (Speed < 5)
             {
+                spriteRenderer.flipX = false;
                 Speed += 0.1f;
             }
         }
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
         {
             if (Speed2 > -5)
             {
+                spriteRenderer.flipX = true;
                 Speed2 -= 0.1f;
             }
         }
