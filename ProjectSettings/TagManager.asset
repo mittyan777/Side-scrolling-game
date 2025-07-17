@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - bloc
+  - Floor
   layers:
   - Default
   - TransparentFX
