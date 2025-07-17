@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     //ジャンプ関係
-    float min_JumpPower = 1f;
+    float min_JumpPower = 5f;
     float max_JumpPower = 15f;
     int max_HoldFrames = 30;
 
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Debug.Log(isGrounded);
+        Move();
         //ジャンプ
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
         {
@@ -45,12 +45,13 @@ public class Player : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space) || holdFrameCount >= max_HoldFrames)
             {
                 Jump();
+                Debug.Log(isGrounded);
             }
         }
 
     }
 
-    private void FixedUpdate()
+    private void Move()
     {
         if (Input.GetKey("a"))
         {

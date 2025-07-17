@@ -6,6 +6,7 @@ TagManager:
   tags:
   - bloc
   - Floor
+  - GameManager
   layers:
   - Default
   - TransparentFX
