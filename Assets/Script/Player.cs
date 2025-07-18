@@ -125,12 +125,22 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
         }
+        if(collision.gameObject.tag == "MoveFloor")
+        {
+            isGrounded = true;
+            transform.SetParent(collision.transform);
+        }
     }
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+        }
+        if (collision.gameObject.tag == "MoveFloor")
+        {
+            isGrounded = false;
+            transform.parent = null;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
