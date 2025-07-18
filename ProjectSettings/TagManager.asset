@@ -8,7 +8,7 @@ TagManager:
   - Floor
   - GameManager
   - Hitbox
-  - StageHole
+  - MoveFloor
   layers:
   - Default
   - TransparentFX
