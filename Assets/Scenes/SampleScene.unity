@@ -743,8 +743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Move_Speed: 0.1
-  Camera_Up_EndPoint: {fileID: 0}
-  Camera_Down_EndPoint: {fileID: 0}
+  Camera_Up_EndPoint: {fileID: 620551161}
+  Camera_Down_EndPoint: {fileID: 1461429781}
   Camera_Left_EndPoint: {fileID: 759248478}
   Camera_Right_EndPoint: {fileID: 1542049714}
 --- !u!1 &601516509
@@ -1024,6 +1024,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.375, y: 1}
   m_EdgeRadius: 0
+--- !u!4 &620551161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2331381949281886688, guid: bbb59ac94bb282b4ea78a7db6544fd7d, type: 3}
+  m_PrefabInstance: {fileID: 8893839199782610517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &666203026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5438,6 +5443,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1461429781 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4387429894553201206, guid: bbb59ac94bb282b4ea78a7db6544fd7d, type: 3}
+  m_PrefabInstance: {fileID: 8893839199782610517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1510810628
 GameObject:
   m_ObjectHideFlags: 0
