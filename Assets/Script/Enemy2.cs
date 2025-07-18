@@ -9,22 +9,22 @@ public class Enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    //@ƒJƒƒ‰‚©‚çŠO‚ê‚½
+    //ï¿½@ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ê‚½
     private void OnBecameInvisible()
     {
         isInsideCamera = false;
 
     }
-    //@ƒJƒƒ‰“à‚É“ü‚Á‚½
+    //ï¿½@ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½
     private void OnBecameVisible()
     {
         isInsideCamera = true;
@@ -32,12 +32,17 @@ public class Enemy2 : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor")
         {
             if (isInsideCamera == true)
             {
                 rb.velocity = new Vector2(-3, 8);
             }
         }
+        if (collision.gameObject.tag == "StageHole")
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
