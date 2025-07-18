@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
                 Debug.Log(isGrounded);
             }
         }
-
     }
 
     private void Move()
@@ -104,6 +103,10 @@ public class Player : MonoBehaviour
 
     //死亡判定
     public bool Get_Player_IsDead() { return IsDead; }
+    void Killing_Player()
+    {
+        IsDead = true;
+    }
 
     void Jump()
     {
