@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (IsDead) return;
+
         Move();
         //ジャンプ
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
