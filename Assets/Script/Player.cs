@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     GameObject parentGameObject;
 
     //ジャンプ関係
-    float min_JumpPower = 5f;
-    float max_JumpPower = 12f;
-    int max_HoldFrames = 30;
+    const float min_JumpPower = 1f;
+    const float max_JumpPower = 12f;
+    const int max_HoldFrames = 15;
 
     private int holdFrameCount = 0;
     private bool isJumpCharging = false;
@@ -30,8 +30,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //死んだら実行しない
+        if (IsDead) return;
+
+        //移動
         Move();
         //ジャンプ
+        JumpState();
+    }
+
+    //ジャンプ前の動作
+    private void JumpState()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
         {
             isJumpCharging = true;
@@ -49,9 +59,7 @@ public class Player : MonoBehaviour
                 Debug.Log(isGrounded);
             }
         }
-
     }
-
     private void Move()
     {
         if (Input.GetKey("a"))
@@ -105,6 +113,11 @@ public class Player : MonoBehaviour
     //死亡判定
     public bool Get_Player_IsDead() { return IsDead; }
 
+    void Killing_Player()
+    {
+        IsDead = true;
+    }
+
     void Jump()
     {
         float powerRatio = Mathf.Clamp01((float)holdFrameCount / max_HoldFrames);
@@ -119,23 +132,30 @@ public class Player : MonoBehaviour
     }
 
     //地面判定
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
+            transform.parent = collision.gameObject.transform;
         }
+        if (collision.gameObject.tag == "StageHole")
+        {
+            Killing_Player();
+        }
+
     }
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+            transform.parent = null;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Hitbox")
+        if (collision.gameObject.tag == "Hitbox")
         {
             parentGameObject = collision.transform.parent.gameObject;
             rb.velocity = new Vector2(rb.velocity.x, 10);
