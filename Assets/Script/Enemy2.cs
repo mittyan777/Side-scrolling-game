@@ -49,7 +49,7 @@ public class Enemy2 : MonoBehaviour
         }
         if (collision.gameObject.tag == "StageHole")
         {
-            Destroy(gameObject);
+             Destroy(gameObject);
         }
 
     }
