@@ -5,17 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float MoveSpeed_Left;
-    [SerializeField] float MoveSpeed_Right;
+    [SerializeField] float max_MoveSpeed;
+    [SerializeField] float Add_MoveSpeed;
+    float Moving_Speed;
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
 
     //ジャンプ関係
-    float min_JumpPower = 5f;
-    float max_JumpPower = 12f;
-    int max_HoldFrames = 30;
+    [SerializeField] float Add_JumpPower;
+    const float min_JumpPower = 5f;
+    const float max_JumpPower = 12f;
+    const int max_JumpHold = 30;
 
-    private int holdFrameCount = 0;
+    private int holdJumpFrame = 0;
     private bool isJumpCharging = false;
     private bool isGrounded = true;
     private bool IsDead = false;
@@ -35,77 +37,85 @@ public class Player : MonoBehaviour
         //移動
         Move();
         //ジャンプ
-        JumpState();
+        Jump();
     }
 
-    private void JumpState()
+    private void Jump()
     {
+        //ジャンプ開始
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
         {
             isJumpCharging = true;
-            holdFrameCount = 0;
+            holdJumpFrame = 0;
+            isGrounded = false;
+            rb.velocity = new Vector2(rb.velocity.x, min_JumpPower);
         }
 
-        if (isJumpCharging)
+        //ジャンプ中
+        if (Input.GetKey(KeyCode.Space) && isJumpCharging)
         {
-            holdFrameCount++;
-            Debug.Log(holdFrameCount);
             //ジャンプする
-            if (Input.GetKeyUp(KeyCode.Space) || holdFrameCount >= max_HoldFrames)
+            if (holdJumpFrame < max_JumpHold)
             {
-                Jump();
-                Debug.Log(isGrounded);
+                holdJumpFrame++;
+                Debug.Log(holdJumpFrame);
+
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + Add_JumpPower);
             }
+        }
+        if (Input.GetKeyUp(KeyCode.Space) || holdJumpFrame >= max_JumpHold)
+        {
+            isJumpCharging = false;
+            holdJumpFrame = 0;
         }
     }
     private void Move()
     {
-        if (Input.GetKey("a"))
+        float input = 0f;
+
+        if (Input.GetKey("a")) input -= 1f;
+        if (Input.GetKey("d")) input += 1f;
+
+        // 入力に応じて加速
+        if (input != 0)
         {
-            //左に進む
-            if (MoveSpeed_Left > -5)
+            spriteRenderer.flipX = (input < 0); // 左向きならFlip
+
+            //滑らかに逆方向へ引き返す
+            if (input < 0 && Moving_Speed > 0)
             {
-                spriteRenderer.flipX = true;
-                MoveSpeed_Left -= 0.05f;
+                //左向きから右向きへ
+                Moving_Speed += Add_MoveSpeed;
+                if (Moving_Speed > 0) Moving_Speed = 0;
+                Debug.Log("LeftRight");
             }
+            else if (input > 0 && Moving_Speed < 0)
+            {
+                //右向きから左向きへ
+                Moving_Speed -= Add_MoveSpeed;
+                if (Moving_Speed < 0) Moving_Speed = 0;
+                Debug.Log("RightLeft");
+            }
+
+            Moving_Speed += Add_MoveSpeed * input;
+            Moving_Speed = Mathf.Clamp(Moving_Speed, -max_MoveSpeed, max_MoveSpeed);
         }
         else
         {
-            //減速する
-            if (MoveSpeed_Left < 0)
+            // 減速（慣性のような動き）
+            if (Moving_Speed > 0)
             {
-                MoveSpeed_Left += 0.05f;
+                Moving_Speed -= Add_MoveSpeed * 5f;
+                if (Moving_Speed < 0) Moving_Speed = 0;
             }
-            else if (MoveSpeed_Left > 0.01f)
+            else if (Moving_Speed < 0)
             {
-                MoveSpeed_Left = 0;
-            }
-        }
-
-        if (Input.GetKey("d"))
-        {
-            //右に進む
-            if (MoveSpeed_Right < 5)
-            {
-                spriteRenderer.flipX = false;
-                MoveSpeed_Right += 0.05f;
+                Moving_Speed += Add_MoveSpeed * 5f;
+                if (Moving_Speed > 0) Moving_Speed = 0;
             }
         }
-        else
-        {
-            //減速する
-            if (MoveSpeed_Right > 0)
-            {
-                MoveSpeed_Right -= 0.05f;
-            }
-            else if (MoveSpeed_Right < 0.01f)
-            {
-                MoveSpeed_Right = 0;
-            }
-        }
-
-        transform.position += transform.right * MoveSpeed_Left * Time.deltaTime;
-        transform.position += transform.right * MoveSpeed_Right * Time.deltaTime;
+        Debug.Log(Moving_Speed);
+        transform.position += transform.right * Moving_Speed * Time.deltaTime;
     }
 
     //死亡判定
@@ -115,16 +125,16 @@ public class Player : MonoBehaviour
         IsDead = true;
     }
 
-    void Jump()
+    void Jumpa()
     {
-        float powerRatio = Mathf.Clamp01((float)holdFrameCount / max_HoldFrames);
+        float powerRatio = Mathf.Clamp01((float)holdJumpFrame / max_JumpHold);
         float JumpPower = Mathf.Lerp(min_JumpPower, max_JumpPower, powerRatio);
         rb.velocity = new Vector2(rb.velocity.x, JumpPower);
 
 
         isJumpCharging = false;
         isGrounded = false;
-        holdFrameCount = 0;
+        holdJumpFrame = 0;
         Debug.Log("Jump!!");
     }
 
