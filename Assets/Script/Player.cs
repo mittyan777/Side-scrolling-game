@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     //ジャンプ関係
     float min_JumpPower = 5f;
-    float max_JumpPower = 15f;
+    float max_JumpPower = 12f;
     int max_HoldFrames = 30;
 
     private int holdFrameCount = 0;

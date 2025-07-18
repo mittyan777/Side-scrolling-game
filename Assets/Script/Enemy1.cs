@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy1 : MonoBehaviour
 {
     private bool Direction = false;
+    private bool isInsideCamera = false;
     SpriteRenderer spriteRenderer;
+    [SerializeField]float speed = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +17,20 @@ public class Enemy1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Direction == false) { transform.position -= transform.right * 3 * Time.deltaTime; }
-        else { transform.position += transform.right * 3 * Time.deltaTime; }
+        if (isInsideCamera == true)
+        {
+            speed = 3;
+            
+            Debug.Log("ADAWDAD");
+        }
+        else
+        {
+            speed = 0;
+        }
 
+
+        if (Direction == false) { transform.position -= transform.right * speed * Time.deltaTime; }
+        else { transform.position += transform.right * speed * Time.deltaTime; }
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,5 +44,17 @@ public class Enemy1 : MonoBehaviour
             else {  spriteRenderer.flipX = false; }
             
         }
+    }
+    //　カメラから外れた
+    private void OnBecameInvisible()
+    {
+        isInsideCamera = false;
+        
+    }
+    //　カメラ内に入った
+    private void OnBecameVisible()
+    { 
+        isInsideCamera = true;
+        
     }
 }
