@@ -20,10 +20,13 @@ public class GameManager : MonoBehaviour
             player_Script = GameObject.FindWithTag("Player").GetComponent<Player>();
             Debug.Log("Player OK");
         }
-
-        if (player_Script.Get_Player_IsDead() == false)
+        else
         {
-            Debug.Log("Player Aliving");
+            if (player_Script.Get_Player_IsDead() == true)
+            {
+                Debug.Log("Player Dead!");
+            }
         }
+
     }
 }
