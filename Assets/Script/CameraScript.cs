@@ -33,12 +33,10 @@ public class CameraScript : MonoBehaviour
         Vector3 Position = this.transform.position;
 
         Position.x = Mathf.Clamp(
-            Player_Pos.position.x, Camera_Left_EndPoint.position.x, Camera_Right_EndPoint.position.x
-            );
+            Player_Pos.position.x, Camera_Left_EndPoint.position.x, Camera_Right_EndPoint.position.x);
 
         Position.y = Mathf.Clamp(
-                    Player_Pos.position.y, Camera_Down_EndPoint.position.y, Camera_Up_EndPoint.position.y
-                    );
+            Player_Pos.position.y, Camera_Down_EndPoint.position.y, Camera_Up_EndPoint.position.y);
 
         this.transform.position =
         Vector3.Lerp(transform.position, Position, Move_Speed);
@@ -46,6 +44,7 @@ public class CameraScript : MonoBehaviour
 
     void Initialize_CameraPos()
     {
-        this.transform.position = new Vector3(Camera_Left_EndPoint.position.x, 0, this.transform.position.z);
+        this.transform.position = new Vector3(
+            Camera_Left_EndPoint.position.x, Camera_Down_EndPoint.position.y, this.transform.position.z);
     }
 }
