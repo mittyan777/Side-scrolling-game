@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float MoveSpeed_Left;
     [SerializeField] float MoveSpeed_Right;
     SpriteRenderer spriteRenderer;
+    GameObject parentGameObject;
 
     //ジャンプ関係
     float min_JumpPower = 5f;
@@ -130,6 +131,15 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Hitbox")
+        {
+            parentGameObject = collision.transform.parent.gameObject;
+            rb.velocity = new Vector2(rb.velocity.x, 10);
+            Destroy(parentGameObject);
         }
     }
 }

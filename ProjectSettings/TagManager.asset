@@ -7,6 +7,7 @@ TagManager:
   - bloc
   - Floor
   - GameManager
+  - Hitbox
   layers:
   - Default
   - TransparentFX
