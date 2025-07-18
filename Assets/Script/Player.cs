@@ -32,8 +32,14 @@ public class Player : MonoBehaviour
     {
         if (IsDead) return;
 
+        //移動
         Move();
         //ジャンプ
+        JumpState();
+    }
+
+    private void JumpState()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
         {
             isJumpCharging = true;
@@ -52,7 +58,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     private void Move()
     {
         if (Input.GetKey("a"))
