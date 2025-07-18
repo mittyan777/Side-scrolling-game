@@ -132,16 +132,20 @@ public class Player : MonoBehaviour
     }
 
     //地面判定
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "StageHole")
+        {
+            Killing_Player();
+        }
+
+    }
     void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
             transform.parent = collision.gameObject.transform;
-        }
-        if (collision.gameObject.tag == "StageHole")
-        {
-            Killing_Player();
         }
 
     }

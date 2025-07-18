@@ -7,7 +7,7 @@ public class Enemy1 : MonoBehaviour
     private bool Direction = false;
     private bool isInsideCamera = false;
     SpriteRenderer spriteRenderer;
-    [SerializeField]float speed = 0;
+    [SerializeField] float speed = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Enemy1 : MonoBehaviour
         if (isInsideCamera == true)
         {
             speed = 3;
-            
+
             Debug.Log("ADAWDAD");
         }
         else
@@ -35,26 +35,30 @@ public class Enemy1 : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "bloc")
+        if (collision.gameObject.tag == "bloc")
         {
-           if(Direction == false) { Direction = true; }
-            else {  Direction = false; }
+            if (Direction == false) { Direction = true; }
+            else { Direction = false; }
 
-           if(spriteRenderer.flipX == false) { spriteRenderer.flipX = true; }
-            else {  spriteRenderer.flipX = false; }
-            
+            if (spriteRenderer.flipX == false) { spriteRenderer.flipX = true; }
+            else { spriteRenderer.flipX = false; }
         }
+        if (collision.gameObject.tag == "StageHole")
+        {
+            Destroy(gameObject);
+        }
+
     }
-    //@ƒJƒƒ‰‚©‚çŠO‚ê‚½
+    //ï¿½@ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ê‚½
     private void OnBecameInvisible()
     {
         isInsideCamera = false;
-        
+
     }
-    //@ƒJƒƒ‰“à‚É“ü‚Á‚½
+    //ï¿½@ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½
     private void OnBecameVisible()
-    { 
+    {
         isInsideCamera = true;
-        
+
     }
 }
