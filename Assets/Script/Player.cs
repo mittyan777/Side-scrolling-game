@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             if (MoveSpeed_Left > -5)
             {
                 spriteRenderer.flipX = true;
-                MoveSpeed_Left -= 0.1f;
+                MoveSpeed_Left -= 0.05f;
             }
         }
         else
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
             //減速する
             if (MoveSpeed_Left < 0)
             {
-                MoveSpeed_Left += 0.1f;
+                MoveSpeed_Left += 0.05f;
             }
             else if (MoveSpeed_Left > 0.01f)
             {
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
             if (MoveSpeed_Right < 5)
             {
                 spriteRenderer.flipX = false;
-                MoveSpeed_Right += 0.1f;
+                MoveSpeed_Right += 0.05f;
             }
         }
         else
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
             //減速する
             if (MoveSpeed_Right > 0)
             {
-                MoveSpeed_Right -= 0.1f;
+                MoveSpeed_Right -= 0.05f;
             }
             else if (MoveSpeed_Right < 0.01f)
             {
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
     }
 
     //地面判定
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
