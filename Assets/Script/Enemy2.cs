@@ -30,6 +30,14 @@ public class Enemy2 : MonoBehaviour
         isInsideCamera = true;
 
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MoveFloor")
+        {
+            transform.SetParent(collision.transform);
+        }
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")

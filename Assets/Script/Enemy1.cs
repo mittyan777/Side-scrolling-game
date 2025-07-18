@@ -43,6 +43,10 @@ public class Enemy1 : MonoBehaviour
             if (spriteRenderer.flipX == false) { spriteRenderer.flipX = true; }
             else { spriteRenderer.flipX = false; }
         }
+        if (collision.gameObject.tag == "MoveFloor")
+        {
+            transform.SetParent(collision.transform);
+        }
         if (collision.gameObject.tag == "StageHole")
         {
             Destroy(gameObject);

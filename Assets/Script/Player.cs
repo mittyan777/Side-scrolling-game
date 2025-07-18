@@ -135,6 +135,11 @@ public class Player : MonoBehaviour
         {
             Killing_Player();
         }
+        if (collision.gameObject.tag == "MoveFloor")
+        {
+            isGrounded = true;
+            transform.SetParent(collision.transform);
+        }
 
     }
     void OnCollisionStay2D(Collision2D collision)
@@ -142,11 +147,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
-        }
-        if (collision.gameObject.tag == "MoveFloor")
-        {
-            isGrounded = true;
-            transform.SetParent(collision.transform);
         }
     }
     void OnCollisionExit2D(Collision2D collision)
