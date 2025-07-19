@@ -40,12 +40,16 @@ public class Enemy2 : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor"  && collision.gameObject.tag != "bloc")
         {
             if (isInsideCamera == true)
             {
                 rb.velocity = new Vector2(-3, 8);
             }
+        }
+        if(collision.gameObject.tag == "bloc")
+        {
+            transform.position -= transform.right * 1 * Time.deltaTime;
         }
         if (collision.gameObject.tag == "StageHole")
         {

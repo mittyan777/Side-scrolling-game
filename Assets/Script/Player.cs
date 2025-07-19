@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     float Moving_Speed;
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
+    public ParticleSystem effect;
 
     //ジャンプ関係
     [SerializeField] float Add_JumpPower;
@@ -175,6 +176,8 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hitbox")
         {
+            //effect = collision.GetComponent<ParticleSystem>();
+            effect.Play();
             parentGameObject = collision.transform.parent.gameObject;
             rb.velocity = new Vector2(rb.velocity.x, 10);
             Destroy(parentGameObject);
