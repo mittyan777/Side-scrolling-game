@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float Default_StageTimer;
     float Set_StageTimer;
     bool Player_Dead;
+    bool Player_Goal;
 
     static int Current_StageNo = 0;
 
@@ -28,7 +29,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Player_Dead)
+        if (Player_Goal)
+        {
+            Invoke("NextStage", 5);
+        }
+        else if (!Player_Dead)
         {
             if (player_Script.Get_Player_IsDead() == true)
             {
@@ -56,4 +61,19 @@ public class GameManager : MonoBehaviour
         //ステージを再読み込み
         SceneManager.LoadScene(Current_StageNo);
     }
+
+    void NextStage()
+    {
+        //Current_StageNo = SceneManager.GetActiveScene().buildIndex+1;
+        Current_StageNo = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(Current_StageNo);
+    }
+
+    public void Set_GoalState(bool a)
+    {
+        Player_Goal = a;
+    }
+
+    public bool Get_GoalState() { return Player_Goal; }
 }

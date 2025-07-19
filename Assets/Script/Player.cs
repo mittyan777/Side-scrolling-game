@@ -11,20 +11,22 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
     public ParticleSystem effect;
-    [SerializeField]AudioSource jumpSource;
-    [SerializeField]AudioSource HitSource;
+    [SerializeField] AudioSource jumpSource;
+    [SerializeField] AudioSource HitSource;
 
     //ジャンプ関係
     [SerializeField] float Add_JumpPower;
     const float min_JumpPower = 5f;
-    const float max_JumpPower = 12f;
     const int max_JumpHold = 30;
-
     private int holdJumpFrame = 0;
     private bool isJumpCharging = false;
     private bool isGrounded = true;
+
     private bool IsDead = false;
+    private bool IsGoaled = false;
     Animator animator;
+    GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,18 +34,21 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-      
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (IsDead) return;
+        if (IsDead || IsGoaled) return;
 
         //移動
         Move();
         //ジャンプ
         Jump();
+
+        Get_Player_Goal();
     }
 
     private void Jump()
@@ -137,10 +142,16 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //ゴール判定
+    void Get_Player_Goal()
+    {
+        IsGoaled = gameManager.Get_GoalState();
+    }
+
     //地面判定
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "StageHole")
+        if (collision.gameObject.tag == "StageHole" || collision.gameObject.tag == "Enemy")
         {
             Killing_Player();
         }
@@ -150,9 +161,9 @@ public class Player : MonoBehaviour
             transform.SetParent(collision.transform);
             animator.SetBool("jump", false);
         }
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Finish")
         {
-            Killing_Player();
+            IsGoaled = true;
         }
 
     }
