@@ -22,10 +22,12 @@ public class Player : MonoBehaviour
     private bool isJumpCharging = false;
     private bool isGrounded = true;
     private bool IsDead = false;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
         //ジャンプ中
         if (Input.GetKey(KeyCode.Space) && isJumpCharging)
         {
+        
             //ジャンプする
             if (holdJumpFrame < max_JumpHold)
             {
@@ -80,6 +83,11 @@ public class Player : MonoBehaviour
         // 入力に応じて加速
         if (input != 0)
         {
+            
+            if (animator.GetBool("jump") == false)
+            {
+                animator.SetBool("walk", true);
+            }
             spriteRenderer.flipX = (input < 0); // 左向きならFlip
 
             //滑らかに逆方向へ引き返す
@@ -103,6 +111,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            animator.SetBool("walk", false);
             // 減速（慣性のような動き）
             if (Moving_Speed > 0)
             {
@@ -150,6 +159,7 @@ public class Player : MonoBehaviour
         {
             isGrounded = true;
             transform.SetParent(collision.transform);
+            animator.SetBool("jump", false);
         }
 
     }
@@ -158,6 +168,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
+            animator.SetBool("jump", false);
         }
     }
     void OnCollisionExit2D(Collision2D collision)
@@ -165,11 +176,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
         {
             isGrounded = false;
+            animator.SetBool("walk", false);
+            animator.SetBool("jump", true);
         }
         if (collision.gameObject.tag == "MoveFloor")
         {
             isGrounded = false;
             transform.parent = null;
+            animator.SetBool("jump", true);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
