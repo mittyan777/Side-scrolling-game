@@ -57,13 +57,11 @@ public class Player : MonoBehaviour
         //ジャンプ中
         if (Input.GetKey(KeyCode.Space) && isJumpCharging)
         {
-        
+
             //ジャンプする
             if (holdJumpFrame < max_JumpHold)
             {
                 holdJumpFrame++;
-                Debug.Log(holdJumpFrame);
-
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + Add_JumpPower);
             }
         }
@@ -83,7 +81,7 @@ public class Player : MonoBehaviour
         // 入力に応じて加速
         if (input != 0)
         {
-            
+
             if (animator.GetBool("jump") == false)
             {
                 animator.SetBool("walk", true);
@@ -124,7 +122,6 @@ public class Player : MonoBehaviour
                 if (Moving_Speed > 0) Moving_Speed = 0;
             }
         }
-        Debug.Log(Moving_Speed);
         transform.position += transform.right * Moving_Speed * Time.deltaTime;
     }
 
@@ -133,19 +130,7 @@ public class Player : MonoBehaviour
     void Killing_Player()
     {
         IsDead = true;
-    }
-
-    void Jumpa()
-    {
-        float powerRatio = Mathf.Clamp01((float)holdJumpFrame / max_JumpHold);
-        float JumpPower = Mathf.Lerp(min_JumpPower, max_JumpPower, powerRatio);
-        rb.velocity = new Vector2(rb.velocity.x, JumpPower);
-
-
-        isJumpCharging = false;
-        isGrounded = false;
-        holdJumpFrame = 0;
-        Debug.Log("Jump!!");
+        Destroy(gameObject);
     }
 
     //地面判定
@@ -160,6 +145,10 @@ public class Player : MonoBehaviour
             isGrounded = true;
             transform.SetParent(collision.transform);
             animator.SetBool("jump", false);
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Killing_Player();
         }
 
     }
