@@ -217,11 +217,23 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hitbox")
         {
+            rb.velocity = new Vector2(rb.velocity.x, 10);
             HitSource.Play();
             effect.Play();
             parentGameObject = collision.transform.parent.gameObject;
+            parentGameObject.GetComponent<Enemy1>().HP -= 1;
+
+            
+        }
+        if (collision.gameObject.tag == "Hitbox2")
+        {
             rb.velocity = new Vector2(rb.velocity.x, 10);
-            Destroy(parentGameObject);
+            HitSource.Play();
+            effect.Play();
+            parentGameObject = collision.transform.parent.gameObject;
+            parentGameObject.GetComponent<Enemy2>().HP -= 1;
+
+
         }
     }
 }
