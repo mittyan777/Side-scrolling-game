@@ -7,6 +7,8 @@ public class GOAL : MonoBehaviour
     [SerializeField] GameObject GOALText;
     BoxCollider2D boxCollider;
     Rigidbody body;
+    [SerializeField] AudioSource BGMSound;
+    bool Soundcontrol = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,11 @@ public class GOAL : MonoBehaviour
     void Update()
     {
         
+       // if (Soundcontrol == true)
+       // {
+       //     BGMSound.volume -= 1 * Time.deltaTime;
+       //     
+       // }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,6 +33,7 @@ public class GOAL : MonoBehaviour
             GOALText.SetActive(true);
             boxCollider = null;
             body = null;
+            Soundcontrol = true;
         }
     }
 }
