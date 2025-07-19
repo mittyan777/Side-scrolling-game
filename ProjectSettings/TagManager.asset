@@ -12,6 +12,7 @@ TagManager:
   - StageHole
   - FxTemporaire
   - Enemy
+  - fire
   layers:
   - Default
   - TransparentFX

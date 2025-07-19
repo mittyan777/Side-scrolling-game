@@ -9520,6 +9520,7 @@ MonoBehaviour:
   effect: {fileID: 391459873}
   jumpSource: {fileID: 1711980838}
   HitSource: {fileID: 1945490115}
+  fire: {fileID: 7992919568617504342, guid: 3336328d8e1a5b142b515ff0d51af1b5, type: 3}
   Add_JumpPower: 0.3
 --- !u!61 &1711980836
 BoxCollider2D:
@@ -9970,6 +9971,99 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b9ec6586cfa6604b9ecb640f8c9909c, type: 3}
+--- !u!1001 &1832178826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 725748389098120093, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389098120094, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389192728893, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807712, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807713, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Name
+      value: CFXR Explosion Smoke 2 Solo (HDR)
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748389856807727, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748390055121424, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748390055121439, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748390129463915, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 725748390129463916, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!1 &1933043040
 GameObject:
   m_ObjectHideFlags: 0
@@ -10001,7 +10095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Label_StageCount: {fileID: 981585638}
   Label_Timer: {fileID: 989706110}
-  Default_StageTimer: 0
+  Default_StageTimer: 200
 --- !u!4 &1933043042
 Transform:
   m_ObjectHideFlags: 0
@@ -10984,6 +11078,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1437150673389629944, guid: 1b9ec6586cfa6604b9ecb640f8c9909c, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6169383417625184073, guid: 1b9ec6586cfa6604b9ecb640f8c9909c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.73
@@ -11196,3 +11294,4 @@ SceneRoots:
   - {fileID: 1344505570}
   - {fileID: 1110706606}
   - {fileID: 169524106}
+  - {fileID: 1832178826}

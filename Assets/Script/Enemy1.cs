@@ -8,10 +8,12 @@ public class Enemy1 : MonoBehaviour
     private bool isInsideCamera = false;
     SpriteRenderer spriteRenderer;
     [SerializeField] float speed = 0;
+   
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+       
     }
 
     // Update is called once per frame
@@ -35,6 +37,11 @@ public class Enemy1 : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "fire")
+        {
+         
+            Destroy(gameObject);
+        }
         if (collision.gameObject.tag == "bloc")
         {
             if (Direction == false) { Direction = true; }

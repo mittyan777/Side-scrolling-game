@@ -16,9 +16,9 @@ public class floorRoteMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        target.transform.RotateAround(transform.position, Vector3.fwd, -15 * Time.deltaTime);
-        target2.transform.RotateAround(transform.position, Vector3.fwd, -15 * Time.deltaTime);
-        target.transform.Rotate(0,0,15 * Time.deltaTime);
-        target2.transform.Rotate(0, 0, 15 * Time.deltaTime);
+        target.transform.RotateAround(transform.position, Vector3.fwd, -25 * Time.deltaTime);
+        target2.transform.RotateAround(transform.position, Vector3.fwd, -25 * Time.deltaTime);
+        target.transform.Rotate(0,0,25 * Time.deltaTime);
+        target2.transform.Rotate(0, 0, 25 * Time.deltaTime);
     }
 }

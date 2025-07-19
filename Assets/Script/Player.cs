@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class Player : MonoBehaviour
     public ParticleSystem effect;
     [SerializeField] AudioSource jumpSource;
     [SerializeField] AudioSource HitSource;
-
+    BoxCollider2D PlayerBoxCollider;
+    [SerializeField] GameObject fire;
+    float cooltime = 0;
     //ジャンプ関係
     [SerializeField] float Add_JumpPower;
     const float min_JumpPower = 5f;
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-
+        PlayerBoxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -49,6 +52,12 @@ public class Player : MonoBehaviour
         Jump();
 
         Get_Player_Goal();
+        cooltime -= 1 * Time.deltaTime;
+        if (Input.GetKeyDown("f") && cooltime < 0)
+        {
+            Instantiate(fire, new Vector3(transform.position.x + 0.5f , transform.position.y + 1), Quaternion.identity);
+            cooltime = 5;
+        }
     }
 
     private void Jump()
@@ -79,6 +88,7 @@ public class Player : MonoBehaviour
             isJumpCharging = false;
             holdJumpFrame = 0;
         }
+
     }
     private void Move()
     {
@@ -139,7 +149,9 @@ public class Player : MonoBehaviour
     void Killing_Player()
     {
         IsDead = true;
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        PlayerBoxCollider.enabled = false;
+        rb.velocity = new Vector2(rb.velocity.x, 10);
     }
 
     //ゴール判定
