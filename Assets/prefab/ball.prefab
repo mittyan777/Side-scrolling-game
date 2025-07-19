@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1468935799137144312}
   m_Layer: 0
   m_Name: ball
-  m_TagString: Untagged
+  m_TagString: fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5483780462676461788}
+  - {fileID: 6089078520639298860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7449614324704969175
@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f2de3ec5a6b8b429fccebcd01e7109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: {fileID: 5483780462676461791}
---- !u!1001 &7987851833008769631
+  effect: {fileID: 6089078520639298863}
+--- !u!1001 &8520811638533955503
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -193,11 +193,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2504214343621411459, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504214343621411459, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504214343621411459, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -235,18 +235,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR3 Hit Fire B (Air)
       objectReference: {fileID: 0}
+    - target: {fileID: 4741991464754137355, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
---- !u!4 &5483780462676461788 stripped
+--- !u!4 &6089078520639298860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2504214343621411459, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
-  m_PrefabInstance: {fileID: 7987851833008769631}
+  m_PrefabInstance: {fileID: 8520811638533955503}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &5483780462676461791 stripped
+--- !u!198 &6089078520639298863 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
-  m_PrefabInstance: {fileID: 7987851833008769631}
+  m_PrefabInstance: {fileID: 8520811638533955503}
   m_PrefabAsset: {fileID: 0}

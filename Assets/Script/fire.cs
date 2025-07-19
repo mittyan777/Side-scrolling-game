@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class fire : MonoBehaviour
 {
+
+    [SerializeField]ParticleSystem effect;
     Vector3 dir2;
     private GameObject Player;
     Rigidbody2D rb;
-    [SerializeField] ParticleSystem effect;
+    
     // Start is called before the first frame update
     void Start()
     {
+  
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player");
         dir2 = Player.transform.position - transform.position;
@@ -32,7 +35,7 @@ public class fire : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             effect.Play();
-            Invoke("des", 2);
+            //Invoke("des", 2);
             
         }
     }

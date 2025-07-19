@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
     BoxCollider2D PlayerBoxCollider;
     [SerializeField] GameObject fire;
     float cooltime = 0;
+    float ballcount = 0;
+    [SerializeField] Text ballcountText;
     //ジャンプ関係
     [SerializeField] float Add_JumpPower;
     const float min_JumpPower = 5f;
@@ -53,11 +56,14 @@ public class Player : MonoBehaviour
 
         Get_Player_Goal();
         cooltime -= 1 * Time.deltaTime;
-        if (Input.GetKeyDown("f") && cooltime < 0)
+        if (Input.GetKeyDown("f") && cooltime < 0 && ballcount > 0)
         {
             Instantiate(fire, new Vector3(transform.position.x + 0.5f , transform.position.y + 1), Quaternion.identity);
+            ballcount -= 1;
             cooltime = 5;
         }
+        ballcountText.text = ($"×{ballcount}");
+
     }
 
     private void Jump()
@@ -176,6 +182,11 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {
             IsGoaled = true;
+        }
+        if (collision.gameObject.tag == "ball")
+        {
+            ballcount += 1;
+            Destroy(collision.gameObject);
         }
 
     }
