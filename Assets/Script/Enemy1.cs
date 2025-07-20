@@ -18,7 +18,7 @@ public class Enemy1 : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-       heart1.SetActive(true);
+        heart1.SetActive(true);
         heart2.SetActive(true);
         parentGameObject = transform.parent.gameObject;
     }
@@ -36,19 +36,19 @@ public class Enemy1 : MonoBehaviour
         {
             speed = 0;
         }
-        if(HP == 0)
+        if (HP == 0)
         {
             heart1.SetActive(false);
             heart2.SetActive(false);
             Destroy(parentGameObject);
-           
+
         }
-        else if(HP == 1)
+        else if (HP == 1)
         {
             heart1.SetActive(true);
             heart2.SetActive(false);
         }
-        else if(HP == 2)
+        else if (HP == 2)
         {
             heart1.SetActive(true);
             heart2.SetActive(true);
@@ -63,8 +63,7 @@ public class Enemy1 : MonoBehaviour
     {
         if (collision.gameObject.tag == "fire")
         {
-         
-            Destroy(gameObject);
+            Destroy(parentGameObject);
         }
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Enemy")
         {
@@ -80,7 +79,7 @@ public class Enemy1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "StageHole")
         {
-            Destroy(gameObject);
+            Destroy(parentGameObject);
         }
 
     }

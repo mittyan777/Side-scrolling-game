@@ -17,6 +17,12 @@ public class CameraScript : MonoBehaviour
     [SerializeField] Transform Camera_Left_EndPoint;
     [SerializeField] Transform Camera_Right_EndPoint;
 
+    [Space(10)]
+
+    [Header("カメラ開始位置")]
+    [SerializeField] Transform Camera_Start_X;
+    [SerializeField] Transform Camera_Start_Y;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +51,6 @@ public class CameraScript : MonoBehaviour
     void Initialize_CameraPos()
     {
         this.transform.position = new Vector3(
-            Camera_Left_EndPoint.position.x, Camera_Down_EndPoint.position.y, this.transform.position.z);
+            Camera_Start_X.position.x, Camera_Start_Y.position.y, this.transform.position.z);
     }
 }
