@@ -44,8 +44,7 @@ public class CameraScript : MonoBehaviour
         Position.y = Mathf.Clamp(
             Player_Pos.position.y, Camera_Down_EndPoint.position.y, Camera_Up_EndPoint.position.y);
 
-        this.transform.position =
-        Vector3.Lerp(transform.position, Position, Move_Speed);
+        this.transform.position = Vector3.Lerp(transform.position, Position, Move_Speed);
     }
 
     void Initialize_CameraPos()
