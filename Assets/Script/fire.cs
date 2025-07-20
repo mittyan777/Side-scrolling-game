@@ -16,14 +16,13 @@ public class fire : MonoBehaviour
   
         rb = GetComponent<Rigidbody2D>();
         Player = GameObject.FindWithTag("Player");
-        dir2 = Player.transform.position - transform.position;
-        rb.velocity = new Vector3(dir2.x * -16, 8);
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+        transform.position += transform.right * 10 * Time.deltaTime;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

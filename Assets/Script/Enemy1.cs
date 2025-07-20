@@ -66,7 +66,7 @@ public class Enemy1 : MonoBehaviour
          
             Destroy(gameObject);
         }
-        if (collision.gameObject.tag == "bloc")
+        if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Enemy")
         {
             if (Direction == false) { Direction = true; }
             else { Direction = false; }

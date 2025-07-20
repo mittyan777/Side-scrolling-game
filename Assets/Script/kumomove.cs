@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class kumomove : MonoBehaviour
 {
+    [SerializeField] float DesSpawn;
+    [SerializeField] float speed;
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("des", 30);
+        Invoke("des", DesSpawn);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.right * 3 * Time.deltaTime;
+        transform.position += transform.right * speed * Time.deltaTime;
     }
     void des()
     {
