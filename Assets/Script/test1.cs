@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test : MonoBehaviour
+public class test1 : MonoBehaviour
 {
     [SerializeField]GameObject parentGameObject;
     // Start is called before the first frame update
@@ -19,7 +19,6 @@ public class test : MonoBehaviour
     public void hit()
     {
         Debug.Log("OK");
-        parentGameObject.GetComponent<Enemy1>().HP -= 1;
-       
+        parentGameObject.GetComponent<Enemy2>().HP -= 1;
     }
 }

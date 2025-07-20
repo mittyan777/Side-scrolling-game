@@ -8,6 +8,7 @@ public class Enemy2 : MonoBehaviour
     private bool isInsideCamera = false;
     [SerializeField] GameObject heart1;
     [SerializeField] GameObject heart2;
+    [SerializeField] GameObject parentGameObject;
     public float HP = 2;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class Enemy2 : MonoBehaviour
         heart1.SetActive(true);
         heart2.SetActive(true);
         rb = GetComponent<Rigidbody2D>();
+        parentGameObject = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -24,7 +26,7 @@ public class Enemy2 : MonoBehaviour
         {
             heart1.SetActive(false);
             heart2.SetActive(false);
-            Destroy(gameObject);
+            Destroy(parentGameObject);
         }
         else if (HP == 1)
         {

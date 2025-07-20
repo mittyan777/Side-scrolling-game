@@ -11,6 +11,7 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] float speed = 0;
     [SerializeField] GameObject heart1;
     [SerializeField] GameObject heart2;
+    [SerializeField] GameObject parentGameObject;
     public float HP = 2;
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class Enemy1 : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
        heart1.SetActive(true);
         heart2.SetActive(true);
+        parentGameObject = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -38,7 +40,8 @@ public class Enemy1 : MonoBehaviour
         {
             heart1.SetActive(false);
             heart2.SetActive(false);
-            Destroy(gameObject);
+            Destroy(parentGameObject);
+           
         }
         else if(HP == 1)
         {
