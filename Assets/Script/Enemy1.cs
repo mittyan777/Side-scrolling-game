@@ -1,4 +1,5 @@
 using Microsoft.Unity.VisualStudio.Editor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,7 +90,14 @@ public class Enemy1 : MonoBehaviour
     {
         if (collision.gameObject.tag == "MoveFloor")
         {
-            parentGameObject.transform.SetParent(null);
+            try
+            {
+                parentGameObject.transform.parent = null;
+            }
+            catch
+            {
+                Debug.Log("parent delete error");
+            }
         }
     }
     //�@�J��������O�ꂽ

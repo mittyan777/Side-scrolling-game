@@ -36,20 +36,23 @@ public class Player : MonoBehaviour
     private bool IsDead = false;
     private bool IsGoaled = false;
     Animator animator;
+    GameManager gameManager;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerBoxCollider = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (gameManager.Get_Is_TimeUP() && !IsDead) { Killing_Player(); }
         if (IsDead || IsGoaled) return;
 
         //移動
