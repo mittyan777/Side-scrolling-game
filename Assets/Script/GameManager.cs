@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("UI関係")]
     [SerializeField] Text Label_StageCount;
     [SerializeField] Text Label_Timer;
-    Player player_Script;
+    [SerializeField] Player player_Script;
     [SerializeField] float Default_StageTimer;
     float Set_StageTimer;
     bool Player_Dead;
@@ -17,13 +17,21 @@ public class GameManager : MonoBehaviour
 
     static int Current_StageNo = 0;
 
+    [Header("BGMリスト")]
+    AudioScript audioScript;
+    [SerializeField] AudioClip BGM_File;
+    [SerializeField] AudioClip DeadSound;
+
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
-        StageInitialize(Default_StageTimer);
 
         player_Script = GameObject.FindWithTag("Player").GetComponent<Player>();
+        audioScript = GameObject.Find("BGM").GetComponent<AudioScript>();
+
+        StageInitialize(Default_StageTimer);
+        Debug.Log("player_Script");
     }
 
     // Update is called once per frame
@@ -31,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         if (Player_Goal)
         {
+            audioScript.Fadeout_AudioVolume();
             Invoke("NextStage", 5);
         }
         else if (!Player_Dead)
@@ -38,6 +47,8 @@ public class GameManager : MonoBehaviour
             if (player_Script.Get_Player_IsDead() == true)
             {
                 Player_Dead = true;
+                audioScript.Stop_Audio();
+                audioScript.OneShot_Play(DeadSound);
                 Debug.Log("Player Dead!");
                 Invoke("ReloadScene", 3);
 
@@ -54,6 +65,7 @@ public class GameManager : MonoBehaviour
         Set_StageTimer = T;
         Current_StageNo = SceneManager.GetActiveScene().buildIndex;
         Label_StageCount.text = $"Stage {Current_StageNo}";
+        audioScript.PlayAudio(BGM_File);
     }
 
     void ReloadScene()
@@ -73,7 +85,6 @@ public class GameManager : MonoBehaviour
     public void Set_GoalState(bool a)
     {
         Player_Goal = a;
+        player_Script.Set_Player_Goal(a);
     }
-
-    public bool Get_GoalState() { return Player_Goal; }
 }

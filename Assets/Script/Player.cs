@@ -13,8 +13,13 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
     public ParticleSystem effect;
-    [SerializeField] AudioSource jumpSource;
-    [SerializeField] AudioSource HitSource;
+
+    //効果音
+    AudioSource audioSource;
+    [SerializeField] AudioClip JumpSound;
+    [SerializeField] AudioClip HitSound;
+    [SerializeField] AudioClip DeadSound;
+
     BoxCollider2D PlayerBoxCollider;
     [SerializeField] GameObject fire;
     float cooltime = 0;
@@ -31,17 +36,15 @@ public class Player : MonoBehaviour
     private bool IsDead = false;
     private bool IsGoaled = false;
     Animator animator;
-    GameManager gameManager;
-
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         PlayerBoxCollider = GetComponent<BoxCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,15 +57,14 @@ public class Player : MonoBehaviour
         //ジャンプ
         Jump();
 
-        Get_Player_Goal();
         cooltime -= 1 * Time.deltaTime;
         if (Input.GetKeyDown("f") && cooltime < 0 && ballcount > 0)
         {
-            Instantiate(fire, new Vector3(transform.position.x + 0.5f , transform.position.y + 1), Quaternion.identity);
+            Instantiate(fire, new Vector3(transform.position.x + 0.5f, transform.position.y + 1), Quaternion.identity);
             ballcount -= 1;
             cooltime = 5;
         }
-        ballcountText.text = ($"×{ballcount}");
+        ballcountText.text = $"×{ballcount}";
 
     }
 
@@ -71,7 +73,7 @@ public class Player : MonoBehaviour
         //ジャンプ開始
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumpCharging)
         {
-            jumpSource.Play();
+            audioSource.PlayOneShot(JumpSound);
             isJumpCharging = true;
             holdJumpFrame = 0;
             isGrounded = false;
@@ -81,7 +83,6 @@ public class Player : MonoBehaviour
         //ジャンプ中
         if (Input.GetKey(KeyCode.Space) && isJumpCharging)
         {
-
             //ジャンプする
             if (holdJumpFrame < max_JumpHold)
             {
@@ -158,12 +159,13 @@ public class Player : MonoBehaviour
         //Destroy(gameObject);
         PlayerBoxCollider.enabled = false;
         rb.velocity = new Vector2(rb.velocity.x, 10);
+        audioSource.PlayOneShot(DeadSound);
     }
 
     //ゴール判定
-    void Get_Player_Goal()
+    public void Set_Player_Goal(bool a)
     {
-        IsGoaled = gameManager.Get_GoalState();
+        IsGoaled = a;
     }
 
     //地面判定
@@ -198,6 +200,7 @@ public class Player : MonoBehaviour
             animator.SetBool("jump", false);
         }
     }
+
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Floor")
@@ -213,28 +216,24 @@ public class Player : MonoBehaviour
             animator.SetBool("jump", true);
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Hitbox")
         {
             rb.velocity = new Vector2(rb.velocity.x, 10);
-            HitSource.Play();
+            audioSource.PlayOneShot(HitSound);
             effect.Play();
             parentGameObject = collision.gameObject;
             parentGameObject.GetComponent<test>().hit();
-
-
         }
         if (collision.gameObject.tag == "Hitbox2")
         {
             rb.velocity = new Vector2(rb.velocity.x, 10);
-            HitSource.Play();
+            audioSource.PlayOneShot(HitSound);
             effect.Play();
             parentGameObject = collision.gameObject;
             parentGameObject.GetComponent<test1>().hit();
-
-
-
         }
     }
 }
