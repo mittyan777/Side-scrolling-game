@@ -43,17 +43,22 @@ public class GameManager : MonoBehaviour
         }
         else if (!Player_Dead)
         {
-            if (player_Script.Get_Player_IsDead() == true)
+            if (player_Script.Get_Player_IsDead() == true || Set_StageTimer <= 0)
             {
                 Player_Dead = true;
                 audioScript.Stop_Audio();
                 Debug.Log("Player Dead!");
                 Invoke("ReloadScene", 3);
-
-                return;
             }
-            Set_StageTimer -= Time.deltaTime;
-            Label_Timer.text = string.Format("Time : {0:D3}", (int)Set_StageTimer);
+            if (Set_StageTimer > 0)
+            {
+                Set_StageTimer -= Time.deltaTime;
+                Label_Timer.text = string.Format("Time : {0:D3}", (int)Set_StageTimer);
+            }
+            else
+            {
+                Label_Timer.text = string.Format("Time : {0:D3}", 0);
+            }
         }
     }
 
@@ -82,4 +87,5 @@ public class GameManager : MonoBehaviour
         Player_Goal = a;
         player_Script.Set_Player_Goal(a);
     }
+    public bool Get_Is_TimeUP() { return Set_StageTimer <= 0; }
 }
