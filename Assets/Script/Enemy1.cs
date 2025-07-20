@@ -12,6 +12,7 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] GameObject heart1;
     [SerializeField] GameObject heart2;
     [SerializeField] GameObject parentGameObject;
+    Transform Parent_Transform;
     public float HP = 2;
 
     // Start is called before the first frame update
@@ -21,6 +22,7 @@ public class Enemy1 : MonoBehaviour
         heart1.SetActive(true);
         heart2.SetActive(true);
         parentGameObject = transform.parent.gameObject;
+        Parent_Transform = transform.parent.gameObject.transform;
     }
 
     // Update is called once per frame
@@ -55,8 +57,8 @@ public class Enemy1 : MonoBehaviour
         }
 
 
-        if (Direction == false) { transform.position -= transform.right * speed * Time.deltaTime; }
-        else { transform.position += transform.right * speed * Time.deltaTime; }
+        if (Direction == false) { Parent_Transform.position -= Parent_Transform.right * speed * Time.deltaTime; }
+        else { Parent_Transform.position += Parent_Transform.right * speed * Time.deltaTime; }
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -75,13 +77,20 @@ public class Enemy1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "MoveFloor")
         {
-            transform.SetParent(collision.transform);
+            parentGameObject.transform.SetParent(collision.transform);
         }
         if (collision.gameObject.tag == "StageHole")
         {
             Destroy(parentGameObject);
         }
+    }
 
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "MoveFloor")
+        {
+            parentGameObject.transform.SetParent(null);
+        }
     }
     //�@�J��������O�ꂽ
     private void OnBecameInvisible()

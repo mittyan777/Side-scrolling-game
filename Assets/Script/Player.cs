@@ -156,9 +156,14 @@ public class Player : MonoBehaviour
     void Killing_Player()
     {
         IsDead = true;
-        //Destroy(gameObject);
         PlayerBoxCollider.enabled = false;
         rb.velocity = new Vector2(rb.velocity.x, 10);
+        audioSource.PlayOneShot(DeadSound);
+    }
+    void FallKill_Player()
+    {
+        IsDead = true;
+        PlayerBoxCollider.enabled = false;
         audioSource.PlayOneShot(DeadSound);
     }
 
@@ -171,26 +176,36 @@ public class Player : MonoBehaviour
     //地面判定
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "StageHole" || collision.gameObject.tag == "Enemy")
+        //死亡処理
+        if (collision.gameObject.tag == "Enemy")
         {
             Killing_Player();
         }
+        if (collision.gameObject.tag == "StageHole")
+        {
+            FallKill_Player();
+        }
+
+        //動く床
         if (collision.gameObject.tag == "MoveFloor")
         {
             isGrounded = true;
             transform.SetParent(collision.transform);
             animator.SetBool("jump", false);
         }
+
+        //ゴール処理
         if (collision.gameObject.tag == "Finish")
         {
             IsGoaled = true;
         }
+
+        //ボール
         if (collision.gameObject.tag == "ball")
         {
             ballcount += 1;
             Destroy(collision.gameObject);
         }
-
     }
     void OnCollisionStay2D(Collision2D collision)
     {

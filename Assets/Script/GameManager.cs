@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("UI関係")]
     [SerializeField] Text Label_StageCount;
     [SerializeField] Text Label_Timer;
-    [SerializeField] Player player_Script;
+    Player player_Script;
     [SerializeField] float Default_StageTimer;
     float Set_StageTimer;
     bool Player_Dead;
@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [Header("BGMリスト")]
     AudioScript audioScript;
     [SerializeField] AudioClip BGM_File;
-    [SerializeField] AudioClip DeadSound;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
         if (Player_Goal)
         {
             audioScript.Fadeout_AudioVolume();
-            Invoke("NextStage", 5);
+            Invoke("NextStage", 7);
         }
         else if (!Player_Dead)
         {
@@ -48,7 +47,6 @@ public class GameManager : MonoBehaviour
             {
                 Player_Dead = true;
                 audioScript.Stop_Audio();
-                audioScript.OneShot_Play(DeadSound);
                 Debug.Log("Player Dead!");
                 Invoke("ReloadScene", 3);
 
@@ -57,7 +55,6 @@ public class GameManager : MonoBehaviour
             Set_StageTimer -= Time.deltaTime;
             Label_Timer.text = string.Format("Time : {0:D3}", (int)Set_StageTimer);
         }
-
     }
 
     void StageInitialize(float T)
@@ -76,9 +73,7 @@ public class GameManager : MonoBehaviour
 
     void NextStage()
     {
-        //Current_StageNo = SceneManager.GetActiveScene().buildIndex+1;
-        Current_StageNo = SceneManager.GetActiveScene().buildIndex;
-
+        Current_StageNo = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(Current_StageNo);
     }
 

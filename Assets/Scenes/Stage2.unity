@@ -15346,7 +15346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5884568484274559936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.5199966
+      value: -1.5200024
       objectReference: {fileID: 0}
     - target: {fileID: 5884568484274559936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15354,11 +15354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.592598
+      value: 29.19
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4479656
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15598,10 +15598,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Label_StageCount: {fileID: 981585638}
   Label_Timer: {fileID: 989706110}
-  player_Script: {fileID: 0}
   Default_StageTimer: 200
   BGM_File: {fileID: 8300000, guid: 6f0ff2acca6a6f842bf7d62b03ae492d, type: 3}
-  DeadSound: {fileID: 8300000, guid: 2096d10b583de234099a81db5f9e41e4, type: 3}
 --- !u!4 &1933043042
 Transform:
   m_ObjectHideFlags: 0
@@ -15952,11 +15950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.2726
+      value: 41.47
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4979658
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 6186011898887640936, guid: 561dc7909e4007b46978943e4590cfbd, type: 3}
       propertyPath: m_LocalPosition.z

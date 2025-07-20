@@ -7,7 +7,7 @@ public class AudioScript : MonoBehaviour
     private AudioClip NextPlay_clip;
     static bool Audio_Loaded = false;
     bool Function_BGM_VolumeDown = false;
-    const float Down_Value = 0.1f;
+    const float Down_Value = 0.2f;
     float CurrentVolume;
     float CurrentPitch;
 
@@ -53,10 +53,9 @@ public class AudioScript : MonoBehaviour
     //音楽をすぐに変更する
     public void Change_PlayAudio(AudioClip audio)
     {
-        if (audioSource.clip == audio) return;
+        if (audioSource.clip == audio || audio == null) return;
         if (Return_AudioPlaying() == true) Stop_Audio();
-        audioSource.clip = audio;
-        audioSource.Play();
+        PlayAudio(audio);
         Debug.Log("Audio Changed");
     }
 
@@ -108,11 +107,7 @@ public class AudioScript : MonoBehaviour
         if (audioSource.volume > 0)
         {
             audioSource.volume -= Down_Value * Time.deltaTime;
-            if (audioSource.volume <= 0)
-            {
-                Stop_Audio();
-                Reset_AudioValue();
-            }
+            if (audioSource.volume <= 0) { Stop_Audio(); }
         }
     }
 
@@ -121,11 +116,7 @@ public class AudioScript : MonoBehaviour
         if (audioSource.pitch > 0)
         {
             audioSource.pitch -= Down_Value * Time.deltaTime;
-            if (audioSource.pitch <= 0)
-            {
-                Stop_Audio();
-                Reset_AudioValue();
-            }
+            if (audioSource.pitch <= 0) { Stop_Audio(); }
         }
     }
 
