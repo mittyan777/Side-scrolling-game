@@ -3700,6 +3700,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2461910068890602414, guid: 88307f80a9b312f4d91a0110eaa41c93, type: 3}
+      propertyPath: ballcountText
+      value: 
+      objectReference: {fileID: 1730361132}
     - target: {fileID: 5251743878268279821, guid: 88307f80a9b312f4d91a0110eaa41c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.414606

@@ -1173,7 +1173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dd7e323b1b41444a93f1b5b1977776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectB: {fileID: 0}
+  Target_Object: {fileID: 0}
   distance: 0
   down: 0
   trigger: 0
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c19e1145327b1e4a93e85e49635e563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectB: {fileID: 0}
+  Target_Object: {fileID: 0}
   distance: 0
 --- !u!212 &499416671
 SpriteRenderer:
@@ -1855,8 +1855,8 @@ MonoBehaviour:
   Camera_Down_EndPoint: {fileID: 1461429781}
   Camera_Left_EndPoint: {fileID: 759248478}
   Camera_Right_EndPoint: {fileID: 1542049714}
-  Camera_Start_X: {fileID: 0}
-  Camera_Start_Y: {fileID: 0}
+  Camera_Start_X: {fileID: 759248478}
+  Camera_Start_Y: {fileID: 1461429781}
 --- !u!1 &531797378
 GameObject:
   m_ObjectHideFlags: 0
@@ -21512,7 +21512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dd7e323b1b41444a93f1b5b1977776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectB: {fileID: 0}
+  Target_Object: {fileID: 0}
   distance: 0
   down: 0
   trigger: 0
@@ -21989,7 +21989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dd7e323b1b41444a93f1b5b1977776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectB: {fileID: 0}
+  Target_Object: {fileID: 0}
   distance: 0
   down: 0
   trigger: 0
