@@ -169,11 +169,11 @@ public class Player : MonoBehaviour
     public bool Get_Player_IsDead() { return IsDead; }
     void Killing_Player()
     {
-        deseffect.Play();
         IsDead = true;
         PlayerBoxCollider.enabled = false;
         rb.velocity = new Vector2(rb.velocity.x, 10);
         audioSource.PlayOneShot(DeadSound);
+        deseffect.Play();
     }
     void FallKill_Player()
     {
