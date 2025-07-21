@@ -97,5 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03eac1764b7fba46bb3bf05eadc47ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesSpawn: 50
   speed: 5

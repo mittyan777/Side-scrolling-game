@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -14,6 +12,7 @@ public class GameManager : MonoBehaviour
     float Set_StageTimer;
     bool Player_Dead;
     bool Player_Goal;
+    bool GoalScript_Loaded = false;
 
     static int Current_StageNo = 0;
 
@@ -30,19 +29,20 @@ public class GameManager : MonoBehaviour
         audioScript = GameObject.Find("BGM").GetComponent<AudioScript>();
 
         StageInitialize(Default_StageTimer);
-        Debug.Log("player_Script");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Player_Goal)
+        if (Player_Goal && !GoalScript_Loaded)
         {
-            audioScript.Fadeout_AudioVolume();
+            audioScript.Set_FadeoutVolume_Function();
+            GoalScript_Loaded = true;
             Invoke("NextStage", 7);
         }
         else if (!Player_Dead)
         {
+            if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Title"); }
             if (player_Script.Get_Player_IsDead() == true || Set_StageTimer <= 0)
             {
                 Player_Dead = true;
@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         Set_StageTimer = T;
         Current_StageNo = SceneManager.GetActiveScene().buildIndex;
         Label_StageCount.text = $"Stage {Current_StageNo}";
+        audioScript.Reset_AudioValue();
         audioScript.PlayAudio(BGM_File);
     }
 

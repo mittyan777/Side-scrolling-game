@@ -42,46 +42,43 @@ public class Enemy3 : MonoBehaviour
     {
         float posY = 0;
         float Sin_Value;
-        if (isInsideCamera == true)
+        speed = 1;
+
+        if (!Stopping_Anim && isInsideCamera)
         {
-            speed = 1;
-
-            if (!Stopping_Anim)
-            {
-                AnimTime += Time.deltaTime;
-                Debug.Log(AnimTime);
-                Sin_Value = Mathf.Sin(AnimTime);
-                Last_Sin = Sin_Value;
-            }
-            else
-            {
-                Sin_Value = Last_Sin;
-            }
-
-            // 上から出る場合
-            if (Spawn_Type == Type.UP)
-            {
-                posY = startPos.y - Sin_Value * speed;
-
-                // ほぼ startPos.y に戻ってきたときにアニメーション停止
-                if (Sin_Value <= 0f && !Stopping_Anim && Trigger_Player) // sin波の下端（＝startPos）に戻ったとき
-                {
-                    Stopping_Anim = true;
-                }
-            }
-            // 下から出る場合
-            else if (Spawn_Type == Type.DOWN)
-            {
-                posY = startPos.y + Sin_Value * speed;
-
-                if (Sin_Value <= 0f && !Stopping_Anim && Trigger_Player) // sin波の上端（＝startPos + 1）に戻ったとき
-                {
-                    Stopping_Anim = true;
-                }
-            }
-            Parent_Transform.position = new Vector3(
-                Parent_Transform.position.x, posY, Parent_Transform.position.z);
+            AnimTime += Time.deltaTime;
+            Sin_Value = Mathf.Sin(AnimTime);
+            Last_Sin = Sin_Value;
         }
+        else
+        {
+            Sin_Value = Last_Sin;
+        }
+
+        // 上から出る場合
+        if (Spawn_Type == Type.UP)
+        {
+            posY = startPos.y - Sin_Value * speed;
+
+            // ほぼ startPos.y に戻ってきたときにアニメーション停止
+            if (Sin_Value <= 0f && !Stopping_Anim && Trigger_Player) // sin波の下端（＝startPos）に戻ったとき
+            {
+                Stopping_Anim = true;
+            }
+        }
+        // 下から出る場合
+        else if (Spawn_Type == Type.DOWN)
+        {
+            posY = startPos.y + Sin_Value * speed;
+
+            if (Sin_Value <= 0f && !Stopping_Anim && Trigger_Player) // sin波の上端（＝startPos + 1）に戻ったとき
+            {
+                Stopping_Anim = true;
+            }
+        }
+        Parent_Transform.position = new Vector3(
+            Parent_Transform.position.x, posY, Parent_Transform.position.z);
+
 
         //体力
         if (HP == 0)
