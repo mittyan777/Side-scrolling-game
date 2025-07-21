@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             GoalScript_Loaded = true;
             Invoke("NextStage", 7);
         }
-        else if (!Player_Dead)
+        else if (!Player_Dead && !Player_Goal)
         {
             if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("Title"); }
             if (player_Script.Get_Player_IsDead() == true || Set_StageTimer <= 0)
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             if (Set_StageTimer > 0)
             {
                 Set_StageTimer -= Time.deltaTime;
-                Label_Timer.text = string.Format("Time : {0:D3}", (int)Set_StageTimer);
+                Label_Timer.text = string.Format("Time : {0:D3}", (int)Set_StageTimer + 1);
             }
             else
             {

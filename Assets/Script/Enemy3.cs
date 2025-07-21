@@ -12,9 +12,12 @@ public class Enemy3 : MonoBehaviour
         UP,
         DOWN
     }
+
+    [SerializeField] Enemy3Trigger TriggerObject;
+    [Space(10)]
     [Header("出現位置")]
     [SerializeField] Type Spawn_Type;
-    [Space(5)]
+    [Space(10)]
     Transform Parent_Transform;
     public float HP = 1;
     float speed;
@@ -30,7 +33,6 @@ public class Enemy3 : MonoBehaviour
         parentGameObject = transform.parent.gameObject;
         Parent_Transform = transform.parent.gameObject.transform;
         startPos = Parent_Transform.position;
-
         if (Spawn_Type == Type.UP)
         {
             Parent_Transform.rotation = Quaternion.Euler(0, 0, 180);
@@ -85,6 +87,9 @@ public class Enemy3 : MonoBehaviour
         {
             Destroy(parentGameObject);
         }
+
+        Trigger_Player = TriggerObject.Get_IsNearPlayer();
+        if (!Trigger_Player) { Stopping_Anim = false; }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -93,29 +98,12 @@ public class Enemy3 : MonoBehaviour
             Destroy(parentGameObject);
         }
     }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Trigger_Player = true;
-        }
-    }
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Trigger_Player = false;
-            Stopping_Anim = false;
-        }
-    }
 
-    //�@�J��������O�ꂽ
     private void OnBecameInvisible()
     {
         isInsideCamera = false;
 
     }
-    //�@�J�������ɓ�����
     private void OnBecameVisible()
     {
         isInsideCamera = true;
