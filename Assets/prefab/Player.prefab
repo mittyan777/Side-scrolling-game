@@ -141,6 +141,7 @@ MonoBehaviour:
   fire: {fileID: 8742811087198620331, guid: c63abfd42748d464ca9a0f7ccceed64f, type: 3}
   ballcountText: {fileID: 0}
   Add_JumpPower: 0.3
+  Invincible_Time: 0.25
   IsGoaled: 0
   MOVEcontrol: 0
   animator: {fileID: 0}
@@ -406,6 +407,10 @@ PrefabInstance:
     - target: {fileID: 2433282510014370363, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2883620193154939874, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6900951462358853761, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
       propertyPath: playOnAwake
