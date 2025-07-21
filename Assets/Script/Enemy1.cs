@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
     private bool Direction = false;
     private bool isInsideCamera = false;
+    bool IsOn_MoveFloor;
     SpriteRenderer spriteRenderer;
     [SerializeField] float speed = 0;
     [SerializeField] GameObject heart1;
@@ -28,8 +30,6 @@ public class Enemy1 : MonoBehaviour
         if (isInsideCamera == true)
         {
             speed = 3;
-
-            Debug.Log("ADAWDAD");
         }
         else
         {
@@ -53,7 +53,10 @@ public class Enemy1 : MonoBehaviour
             heart2.SetActive(true);
         }
 
-
+        if (!IsOn_MoveFloor)
+        {
+            parentGameObject.transform.parent = null;
+        }
         if (Direction == false) { Parent_Transform.position -= Parent_Transform.right * speed * Time.deltaTime; }
         else { Parent_Transform.position += Parent_Transform.right * speed * Time.deltaTime; }
 
@@ -66,14 +69,12 @@ public class Enemy1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Enemy")
         {
-            if (Direction == false) { Direction = true; }
-            else { Direction = false; }
-
-            if (spriteRenderer.flipX == false) { spriteRenderer.flipX = true; }
-            else { spriteRenderer.flipX = false; }
+            Direction = !Direction;
+            spriteRenderer.flipX = !spriteRenderer.flipX;
         }
         if (collision.gameObject.tag == "MoveFloor")
         {
+            IsOn_MoveFloor = true;
             parentGameObject.transform.SetParent(collision.transform);
         }
         if (collision.gameObject.tag == "StageHole")
@@ -86,16 +87,10 @@ public class Enemy1 : MonoBehaviour
     {
         if (collision.gameObject.tag == "MoveFloor")
         {
-            try
-            {
-                parentGameObject.transform.parent = null;
-            }
-            catch
-            {
-                Debug.Log("parent delete error");
-            }
+            IsOn_MoveFloor = false;
         }
     }
+
     //�@�J��������O�ꂽ
     private void OnBecameInvisible()
     {

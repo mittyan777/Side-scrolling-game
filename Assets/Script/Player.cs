@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     GameObject parentGameObject;
     public ParticleSystem effect;
 
-    //効果音
+    [Header("効果音")]
     AudioSource audioSource;
     [SerializeField] AudioClip JumpSound;
     [SerializeField] AudioClip HitSound;
@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     private int holdJumpFrame = 0;
     private bool isJumpCharging = false;
     private bool isGrounded = true;
+    [Header("踏みつけ時の無敵時間")]
+    [SerializeField] float Invincible_Time = 0.25f;
+    float Invincible_CountTime = 0f;
 
     private bool IsDead = false;
     private bool IsGoaled = false;
@@ -61,6 +64,10 @@ public class Player : MonoBehaviour
         Jump();
 
         cooltime -= 1 * Time.deltaTime;
+
+        //踏みつけ時の無敵時間
+        if (Invincible_CountTime > 0) { Invincible_CountTime -= Time.deltaTime; }
+        //ボール投球
         if (Input.GetKeyDown("f") && cooltime < 0 && ballcount > 0)
         {
             Instantiate(fire, new Vector3(transform.position.x + 0.5f, transform.position.y + 1), Quaternion.identity);
@@ -180,7 +187,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         //死亡処理
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && Invincible_CountTime <= 0)
         {
             Killing_Player();
         }
@@ -244,6 +251,7 @@ public class Player : MonoBehaviour
             effect.Play();
             parentGameObject = collision.gameObject;
             parentGameObject.GetComponent<test>().hit();
+            Invincible_CountTime = Invincible_Time;
         }
         if (collision.gameObject.tag == "Hitbox2")
         {

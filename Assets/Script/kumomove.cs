@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class kumomove : MonoBehaviour
 {
-    [SerializeField] float DesSpawn;
+    //[SerializeField] float DesSpawn;
     [SerializeField] float speed;
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("des", DesSpawn);
+        //Invoke("des", DesSpawn);
     }
 
     // Update is called once per frame
@@ -20,5 +20,13 @@ public class kumomove : MonoBehaviour
     void des()
     {
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "CloudEnd")
+        {
+            des();
+        }
     }
 }

@@ -15,11 +15,11 @@ public class Toemitclouds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
     }
     void Toemit()
     {
-        Instantiate(kumo, new Vector3(-10,Random.Range(3,14),0), Quaternion.identity);
+        Instantiate(kumo, new Vector3(-9, Random.Range(3, 10), 0), Quaternion.identity);
     }
 }

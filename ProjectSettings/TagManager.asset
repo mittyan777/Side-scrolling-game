@@ -15,6 +15,7 @@ TagManager:
   - fire
   - ball
   - Hitbox2
+  - CloudEnd
   layers:
   - Default
   - TransparentFX
