@@ -28,5 +28,9 @@ public class kumomove : MonoBehaviour
         {
             des();
         }
+        if(collision.gameObject.tag == "StageHole")
+        {
+            des();
+        }
     }
 }
