@@ -14,6 +14,9 @@ public class Enemy1 : MonoBehaviour
     Transform Parent_Transform;
     public float HP = 2;
 
+    const float Wait_ChangeDirection = 0.2f;
+    float Direction_Timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,9 @@ public class Enemy1 : MonoBehaviour
         {
             parentGameObject.transform.parent = null;
         }
+
+        if (Direction_Timer > 0) { Direction_Timer -= Time.deltaTime; }
+
         if (Direction == false) { Parent_Transform.position -= Parent_Transform.right * speed * Time.deltaTime; }
         else { Parent_Transform.position += Parent_Transform.right * speed * Time.deltaTime; }
 
@@ -69,8 +75,12 @@ public class Enemy1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "bloc" || collision.gameObject.tag == "Enemy")
         {
-            Direction = !Direction;
-            spriteRenderer.flipX = !spriteRenderer.flipX;
+            if (Direction_Timer <= 0)
+            {
+                Direction_Timer = Wait_ChangeDirection;
+                Direction = !Direction;
+                spriteRenderer.flipX = !spriteRenderer.flipX;
+            }
         }
         if (collision.gameObject.tag == "MoveFloor")
         {

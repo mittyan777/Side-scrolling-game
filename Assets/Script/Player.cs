@@ -61,12 +61,12 @@ public class Player : MonoBehaviour
         if (gameManager.Get_Is_TimeUP() && !IsDead) { Killing_Player(); }
         if (IsDead || IsGoaled) return;
         //移動
-        if (MOVEcontrol == false) {Move(); }
-        
-        
+        if (MOVEcontrol == false) { Move(); }
+
+
         //ジャンプ
         Jump();
-        
+
         cooltime -= 1 * Time.deltaTime;
 
         //踏みつけ時の無敵時間
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             {
                 Instantiate(fire, new Vector3(transform.position.x + 0.5f, transform.position.y + 1), Quaternion.identity);
             }
-            else if(spriteRenderer.flipX == true) 
+            else if (spriteRenderer.flipX == true)
             {
                 Instantiate(fire, new Vector3(transform.position.x - 0.5f, transform.position.y + 1), Quaternion.identity);
             }
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-         input = 0f;
+        input = 0f;
 
         if (Input.GetKey("a")) input -= 1f;
         if (Input.GetKey("d")) input += 1f;
@@ -276,6 +276,7 @@ public class Player : MonoBehaviour
             effect.Play();
             parentGameObject = collision.gameObject;
             parentGameObject.GetComponent<test1>().hit();
+            Invincible_CountTime = Invincible_Time;
         }
     }
 }
