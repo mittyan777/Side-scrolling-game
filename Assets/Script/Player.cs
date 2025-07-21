@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float max_MoveSpeed;
     [SerializeField] float Add_MoveSpeed;
-    float Moving_Speed;
+    public float Moving_Speed;
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
     public ParticleSystem effect;
@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
 
     private bool IsDead = false;
     private bool IsGoaled = false;
-    Animator animator;
+    public bool MOVEcontrol = false;
+    public Animator animator;
     GameManager gameManager;
 
     // Start is called before the first frame update
@@ -54,9 +55,10 @@ public class Player : MonoBehaviour
     {
         if (gameManager.Get_Is_TimeUP() && !IsDead) { Killing_Player(); }
         if (IsDead || IsGoaled) return;
-
         //移動
-        Move();
+        if (MOVEcontrol == false) {Move(); }
+        
+        
         //ジャンプ
         Jump();
 
@@ -237,6 +239,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Killing_Player();
+        }
         if (collision.gameObject.tag == "Hitbox")
         {
             rb.velocity = new Vector2(rb.velocity.x, 10);

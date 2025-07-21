@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4176694845418011224, guid: 1b9ec6586cfa6604b9ecb640f8c9909c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6169383417625184073, guid: 1b9ec6586cfa6604b9ecb640f8c9909c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.6066103

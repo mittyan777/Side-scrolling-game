@@ -20,7 +20,7 @@ public class dosun : MonoBehaviour
     void Update()
     {
          distance = Vector3.Distance(this.transform.position, objectB.position);
-        if(distance < 4.5 && down == false && trigger == false)
+        if(distance < 4.7 && down == false && trigger == false)
         {
             down = true;
             trigger = true;
