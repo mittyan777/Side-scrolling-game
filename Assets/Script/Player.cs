@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameObject parentGameObject;
     public ParticleSystem effect;
+    public ParticleSystem deseffect;
 
     //効果音
     AudioSource audioSource;
@@ -34,11 +35,12 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
 
     private bool IsDead = false;
-    private bool IsGoaled = false;
+    public bool IsGoaled = false;
     public bool MOVEcontrol = false;
     public Animator animator;
     GameManager gameManager;
 
+    public float input;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,13 +63,20 @@ public class Player : MonoBehaviour
         
         //ジャンプ
         Jump();
-
+        
         cooltime -= 1 * Time.deltaTime;
         if (Input.GetKeyDown("f") && cooltime < 0 && ballcount > 0)
         {
-            Instantiate(fire, new Vector3(transform.position.x + 0.5f, transform.position.y + 1), Quaternion.identity);
+            if (spriteRenderer.flipX == false)
+            {
+                Instantiate(fire, new Vector3(transform.position.x + 0.5f, transform.position.y + 1), Quaternion.identity);
+            }
+            else if(spriteRenderer.flipX == true) 
+            {
+                Instantiate(fire, new Vector3(transform.position.x - 0.5f, transform.position.y + 1), Quaternion.identity);
+            }
             ballcount -= 1;
-            cooltime = 5;
+            cooltime = 1;
         }
         ballcountText.text = $"×{ballcount}";
 
@@ -104,7 +113,7 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-        float input = 0f;
+         input = 0f;
 
         if (Input.GetKey("a")) input -= 1f;
         if (Input.GetKey("d")) input += 1f;
@@ -160,6 +169,7 @@ public class Player : MonoBehaviour
     public bool Get_Player_IsDead() { return IsDead; }
     void Killing_Player()
     {
+        deseffect.Play();
         IsDead = true;
         PlayerBoxCollider.enabled = false;
         rb.velocity = new Vector2(rb.velocity.x, 10);

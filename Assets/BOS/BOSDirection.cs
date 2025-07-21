@@ -11,23 +11,23 @@ public class BOSDirection : MonoBehaviour
     public Transform objectB; // 距離を測りたいオブジェクトB
     [SerializeField] float distance;
     BoxCollider2D boxCollider2D;
-   
+    GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         distance = Vector3.Distance(this.transform.position, objectB.position);
-        if (distance < 10)
+        if (distance < 6)
         {
-            
+            gameManager.Set_GoalState(true);
             Invoke("direction", 3);
         }
         if(distance < 5)

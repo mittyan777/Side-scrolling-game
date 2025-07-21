@@ -38,6 +38,7 @@ public class fire : MonoBehaviour
             //Invoke("des", 2);
             
         }
+        
     }
     void des()
     {

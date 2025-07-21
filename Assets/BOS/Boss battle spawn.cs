@@ -31,6 +31,6 @@ public class Bossbattlespawn : MonoBehaviour
     }
     void spawn2()
     {
-        Instantiate(tamago, new Vector3(Random.Range(-12,9),12,0), Quaternion.identity);
+        Instantiate(tamago, new Vector3(Random.Range(-12,8),12,0), Quaternion.identity);
     }
 }
