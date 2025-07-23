@@ -16,6 +16,7 @@ TagManager:
   - ball
   - Hitbox2
   - CloudEnd
+  - Hitbox3
   layers:
   - Default
   - TransparentFX

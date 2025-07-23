@@ -278,5 +278,14 @@ public class Player : MonoBehaviour
             parentGameObject.GetComponent<test1>().hit();
             Invincible_CountTime = Invincible_Time;
         }
+        if (collision.gameObject.tag == "Hitbox3")
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 10);
+            audioSource.PlayOneShot(HitSound);
+            effect.Play();
+            parentGameObject = collision.gameObject;
+            parentGameObject.GetComponent<test2>().hit();
+            Invincible_CountTime = Invincible_Time;
+        }
     }
 }

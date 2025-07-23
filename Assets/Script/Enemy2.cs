@@ -64,6 +64,10 @@ public class Enemy2 : MonoBehaviour
         {
             Destroy(parentGameObject);
         }
+        if (collision.gameObject.tag == "fire")
+        {
+            Destroy(parentGameObject);
+        }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
